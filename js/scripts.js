@@ -1,33 +1,34 @@
 $(document).ready(function() {
+ //
+  $("#translate").click(function(){
+    translate();
+      });
+      
+      var latinPig = function(str) {
+          var str = str.split(' ');
+         	var consonantArray = [];
 
-  //BUSINESS LOGIC
-  var translation = function(english) {
-    if ((year % 4 === 0) && (year % 100 !== 0) || (year % 400 === 0)) {
-    return true;
-  } else {
-    return false;
-  }
-  };
+          for (i = 0; i < str.length; i++) {
+            if (/[aeiou]/.test(str[i].charAt(0)) === true) {
+              str[i] = str[i] + "ay";
 
-  //UI LOGIC
-  $("form#translator").submit(function(event) {
-    event.preventDefault();
+            } else if (/[aeiou]/.test(str[i].charAt(0)) !== true) {
+              var letters = str[i].split('');
+              for (var j = 0; j < letters.length; j++) {
+                if (/[aeiou]/.test(letters[i]) === false) {
+                  consonantArray.push(letters[i]);
+                } else {
+                  break;
+                }
+              }
+              letters.splice(0, consonantArray.length);
+              letters.push(consonantArray.join('') + "ay");
 
-    var english = $("input#phrase").split();
-    var piglatin = translation(english);
+              }
+              }
+              console.log(letters.join(''));
+            };
 
-    if (isNaN(year)) {
-      alert("Please type a valid number");
-    } else if (!result) {
-      $(".not").text("not");
-    } else if (result) {
-      $(".not").text("");
-    } else {
-      alert("please type a valid number.")
-    };
+            latinPig("what");
 
-    $(".years").text(year);
-
-    $("#result").show();
-  });
 });
